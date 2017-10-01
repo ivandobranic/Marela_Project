@@ -1,0 +1,165 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using MarelaProject.Models;
+
+@model IPagedList<MarelaProject.Models.MarelaModels>
+
+
+
+@{
+    ViewBag.Title = "Malicious Files";
+    Layout = "_Layout2.cshtml";
+}
+<body onload="alternate('thetable')">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <style>
+        .odd {
+            background-color: aliceblue;
+        }
+
+        .even {
+            background-color: white;
+        }
+    </style>
+    <p>
+        @using (Html.BeginForm("MaliciousFiles", "Marela", FormMethod.Get))
+        {
+            <b>Search By:</b> @Html.RadioButton("SearchBy", "MalwareName", true) <text>Malware Name</text>
+            @Html.RadioButton("SearchBy", "CompanyName") <text>Company Name</text>
+            @Html.TextBox("Search") <input type="submit" , value="Search" class="btn btn-default" />
+        }
+    </p>
+
+    <table class="table" id="thetable">
+        <tr style="background-color:cadetblue">
+            <th>
+                @Html.DisplayNameFor(model => model.First().ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().InvestigationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MalwareName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MD5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SHA1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SHA256)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ssdeep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FileType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FileSize)
+            </th>
+            <th colspan="2", style="text-align:center">
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+
+        </tr>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="11">No rows match search criteria</td>
+            </tr>
+        }
+        else
+        {
+
+            foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvestigationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MalwareName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MD5)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SHA1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SHA256)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ssdeep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileSize)
+                        @if (item.FileSize != null)
+                    {<text>bytes</text>}
+                    </td>
+                    <td class="multiline">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+   @{SelectList itemsPerPageList = PageValues.ItemsPerPageList; }
+   @using (Html.BeginForm("MaliciousFiles", "Marela", FormMethod.Post))
+        {
+            @Html.DropDownList("ItemsPerPage", itemsPerPageList,
+     new { @id = "ItemsPerPageList", onchange = "this.form.submit();" })
+        }
+
+    
+    @Html.PagedListPager(Model, Page => Url.Action("MaliciousFiles", new
+{
+    Page,
+    SerchBy = Request.QueryString["SearchBy"],
+    Search = Request.QueryString["Search"],
+    itemsPerPage = ViewBag.CurrentItemsPerPage
+}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</body>
+<script>
+    function alternate(id) {
+        if (document.getElementsByTagName) {
+            var table = document.getElementById(id);
+            var rows = table.getElementsByTagName("tr");
+            for (i = 0; i < rows.length; i++) {
+
+                if (i % 2 == 0) {
+                    rows[i].className = "even";
+                } else {
+                    rows[i].className = "odd";
+                }
+            }
+        }
+    }
+</script>

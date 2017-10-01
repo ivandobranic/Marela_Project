@@ -1,0 +1,120 @@
+﻿@model MarelaProject.Models.MarelaModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InvestigationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvestigationNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MalwareName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MalwareName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MD5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MD5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SHA1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SHA1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SHA256)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SHA256)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ssdeep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ssdeep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileSize) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileSize) <text>bytes</text>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="multiline">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "MaliciousFiles")
+</p>
